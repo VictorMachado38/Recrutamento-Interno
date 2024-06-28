@@ -1,0 +1,53 @@
+<div class="col-12" style="display: flex;padding: 2rem 1rem 1rem 1rem">
+
+  <!--    cliente-->
+  <div class="col-12">
+
+    <samp class="format-client-title">{{titlePage}}</samp>
+
+    <div style="display: flex; width: 100%">
+      <div class="field" style=" width: 100%; padding-right: 0rem">
+        <label for="input-code"  [class]="invalTitulo ? 'v-color-red' : '' "  class="block">Título</label>
+        <input style=" width: 100%" [class]="invalTitulo ? 'ng-invalid ng-dirty' : '' " id="input-code" placeholder="" type="username"
+               aria-describedby="input-code" pInputText [(ngModel)]="cadastroVaga.titulo"/>
+      </div>
+    </div>
+
+    <div class="field" style=" width: 100%">
+      <label for="input-name" [class]="invalDescricao ? 'v-color-red' : '' " class="block">Descrição</label>
+      <input style=" width: 100%" id="input-name" [class]="invalDescricao ? 'ng-invalid ng-dirty' : '' " placeholder="" type="username"
+             aria-describedby="username1-help" pInputText [(ngModel)]="cadastroVaga.descricao"/>
+    </div>
+
+    <div class="field" style=" width: 100%">
+      <label for="input-requisitos"  class="block">Requisitos</label>
+<!--      <input style=" width: 100%" id="input-name" [class]="invalCnpj ? 'ng-invalid ng-dirty' : '' " placeholder="" type="username"-->
+<!--             aria-describedby="username1-help" pInputText [(ngModel)]="cliete.nome"/>-->
+        <textarea style="    width: 100%;" [rows]="5"  id="input-requisitos"  [(ngModel)]="cadastroVaga.requisitos" pInputTextarea [autoResize]="false" ></textarea>
+
+
+
+
+    </div>
+
+
+    <hr>
+
+
+
+    <button (click)="sendForm()" pButton pRipple type="button" label="Salvar"
+            class="p-button-outlined p-button-rounded p-button-sm"></button>
+
+
+  </div>
+
+
+</div>
+
+
+<p-toast position="bottom-left" ></p-toast>
+<!--<p-toast  ></p-toast>-->
+
+<!--<button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success mb-2"></button>-->
+<!--<app-map></app-map>-->
+

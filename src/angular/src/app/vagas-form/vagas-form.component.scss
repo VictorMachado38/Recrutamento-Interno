@@ -1,0 +1,75 @@
+.v-font-format {
+  font-size: 15px !important;
+  color: black;
+}
+.v-color-red{
+  color: red !important;
+}
+
+.v-espamento{
+  margin-bottom: 1.5rem !important;
+}
+::ng-deep .w-100 > input{
+  width: 100% !important;
+}
+
+.format-client-title{
+  font-size: 20px !important;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 1.5rem !important;
+  display: block;
+  font-family: BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+}
+.format-addres-title{
+  font-size: 18px !important;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 1.5rem !important;
+  display: block;
+  font-family: Arial;
+}
+
+.no-focus-no-focus:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.no-focus-no-focus:hover {
+  outline: none;
+  box-shadow: none;
+  border: none;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.no-focus-no-focus{
+  background-color: #ededed !important;
+  box-shadow: none !important;
+  outline: none;
+  border: none;
+  cursor: not-allowed;
+}
+
+
+
+
+
+//.sddfs{
+//  width: 100% !important;
+//}
+
+
+
+//html,
+//body {
+//  margin: 0;
+//  width: 100%;
+//  height: 100%;
+//}
+//#map-canvas {
+//  width: 100%;
+//  height: 100%;
+//}
+

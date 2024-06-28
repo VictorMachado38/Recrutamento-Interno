@@ -1,0 +1,41 @@
+version: '3.3'
+services:
+  postgress-14-image:
+    ports:
+      - '5432:5432'
+    container_name: Banco-de-Dados
+#    image: postgres local
+#    image: victormachado38/logistics:postgres
+    image: postgres:14
+    environment:
+      - POSTGRES_PASSWORD=admin
+    networks:
+      mynetwork:
+        ipv4_address: 172.19.0.20
+  angular:
+    ports:
+      - '9000:80/tcp'
+    container_name: angular
+#    image: angular local
+    image: victormachado38/pacto:angular
+    networks:
+      - mynetwork
+#    environment:
+#      - DATABASE_URL=jdbc:postgresql://Banco-de-Dados:5432/postgres
+#      - DATABASE_USERNAME=postgres
+#      - DATABASE_PASSWORD=admin
+  java:
+    ports:
+      - '8081:8081'
+    container_name: java
+#    image: java-app local
+    image: victormachado38/pacto:java
+    networks:
+      mynetwork:
+        ipv4_address: 172.19.0.19
+networks:
+  mynetwork:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
