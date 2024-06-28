@@ -1,5 +1,7 @@
 ## Java Recrutamento Interno
 
+## A aplicação esta online nesse link (https) -> https://n9.cl/pacto-teste
+## A aplicação esta online nesse link (http) ->  http://pacto.tteste.online:9000/
 
 <p align="center">
   <img width="704.4" height="462" src="/src/video.gif">
@@ -18,7 +20,7 @@ Docker(opcional)
 
 Compose está configurado para rodar o backend na porta 8081, o frontend na porta 9000 e o banco de dados na 5432. Se você quiser mudar, altere o arquivo logistics/src/docker/***[docker-compose.yml](src/docker/docker-compose.yml)***.
 
-O Docker Hub para o projeto é [Docker-hub-link](https://hub.docker.com/repository/docker/victormachado38/logistics/general)
+O Docker Hub para o projeto é [Docker-hub-link](https://hub.docker.com/repository/docker/victormachado38/pacto)
 
 Para rodar o Docker, execute o comando:
 ```
