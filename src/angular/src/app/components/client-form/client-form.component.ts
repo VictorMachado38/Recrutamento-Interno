@@ -1,5 +1,4 @@
 import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
-import {ClientDTO} from "../../model/dto/client.dto";
 import {HttpClient} from "@angular/common/http";
 import {cpf} from 'cpf-cnpj-validator';
 import {cnpj} from 'cpf-cnpj-validator';
@@ -8,9 +7,9 @@ import {catchError, map} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import {MessageService} from "primeng/api";
 import {GoogleMapsModule} from "@angular/google-maps";
-import {EnderecoDTO} from "../../model/dto/endereco.dto";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from '@angular/common';
+import {ClientDTO} from "../../../model/dto/client.dto";
 
 
 @Component({

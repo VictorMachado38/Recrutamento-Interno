@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
-import {CadastroVagaDto} from "../../model/dto/cadastro-vaga.dto";
+import {CadastroVagaDto} from "../../../model/dto/cadastro-vaga.dto";
 
 @Component({
   selector: 'app-vagas-form',

@@ -3,8 +3,8 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {ClientFormComponent} from './client-form/client-form.component';
-import {ClientListComponent} from './client-list/client-list.component';
+import {ClientFormComponent} from './components/client-form/client-form.component';
+import {ClientListComponent} from './components/client-list/client-list.component';
 import {TabMenuModule} from "primeng/tabmenu";
 import {RouterModule} from "@angular/router";
 import {ButtonModule} from "primeng/button";
@@ -25,11 +25,12 @@ import {CheckboxModule} from "primeng/checkbox";
 import {MessageService} from "primeng/api";
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {ToastModule} from "primeng/toast";
-import { InitComponent } from './init/init.component';
-import { VagasFormComponent } from './vagas-form/vagas-form.component';
-import { VagasListComponent } from './vagas-list/vagas-list.component';
+import { InitComponent } from './components/init/init.component';
+import { VagasFormComponent } from './components/vagas-form/vagas-form.component';
+import { VagasListComponent } from './components/vagas-list/vagas-list.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {EditorModule} from "primeng/editor";
+import { SelectProfileComponent } from './components/select-profile/select-profile.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import {EditorModule} from "primeng/editor";
         // MapComponent,
         InitComponent,
         VagasFormComponent,
-        VagasListComponent
+        VagasListComponent,
+        SelectProfileComponent
     ],
   imports: [
     BrowserModule,
