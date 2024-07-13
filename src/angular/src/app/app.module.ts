@@ -31,6 +31,8 @@ import { VagasListComponent } from './components/vagas-list/vagas-list.component
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {EditorModule} from "primeng/editor";
 import { SelectProfileComponent } from './components/select-profile/select-profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileCandidateComponent } from './components/profile-candidate/profile-candidate.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +43,9 @@ import { SelectProfileComponent } from './components/select-profile/select-profi
         InitComponent,
         VagasFormComponent,
         VagasListComponent,
-        SelectProfileComponent
+        SelectProfileComponent,
+        LoginComponent,
+        ProfileCandidateComponent
     ],
   imports: [
     BrowserModule,
