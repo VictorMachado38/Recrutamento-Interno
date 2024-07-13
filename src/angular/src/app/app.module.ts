@@ -33,6 +33,8 @@ import {EditorModule} from "primeng/editor";
 import { SelectProfileComponent } from './components/select-profile/select-profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileCandidateComponent } from './components/profile-candidate/profile-candidate.component';
+import { ApplicationManagerComponent } from './components/application-manager/application-manager.component';
+import { RecruiterProfileComponent } from './components/recruiter-profile/recruiter-profile.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +47,9 @@ import { ProfileCandidateComponent } from './components/profile-candidate/profil
         VagasListComponent,
         SelectProfileComponent,
         LoginComponent,
-        ProfileCandidateComponent
+        ProfileCandidateComponent,
+        ApplicationManagerComponent,
+        RecruiterProfileComponent
     ],
   imports: [
     BrowserModule,

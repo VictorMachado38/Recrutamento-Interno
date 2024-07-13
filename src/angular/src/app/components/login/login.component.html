@@ -25,7 +25,7 @@
     <h4>Bem vindo <span></span></h4>
     <p>Faça login em sua conta:</p>
     <div class="floating-label">
-      <input placeholder="Email" type="email" name="email" id="email" autocomplete="off">
+      <input placeholder="Email" type="email" [(ngModel)]="login.login" name="email" id="email" autocomplete="off">
       <label for="email">Email:</label>
       <div class="icon">
 
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="floating-label">
-      <input placeholder="Senha" type="password" name="password" id="password" autocomplete="off">
+      <input placeholder="Senha" [(ngModel)]="login.password" type="password" name="password" id="password" autocomplete="off">
       <label for="password">Senha:</label>
       <div class="icon">
         <svg enable-background="new 0 0 24 24" version="1.1" viewBox="0 0 24 24" xml:space="preserve"
@@ -70,7 +70,7 @@
       </div>
 
     </div>
-    <button type="submit" style="cursor: pointer" onClick="return false;">Entrar</button>
+    <button type="submit" style="cursor: pointer" (click)="sendForm()">Entrar</button>
     <a class="discrete" style="cursor: pointer" (click)="changeNewUser()">Criar conta</a>
   </form>
 
@@ -126,10 +126,12 @@
                 d="m12 16.5c-0.8 0-1.5-0.7-1.5-1.5s0.7-1.5 1.5-1.5 1.5 0.7 1.5 1.5-0.7 1.5-1.5 1.5zm0-2c-0.3 0-0.5 0.2-0.5 0.5s0.2 0.5 0.5 0.5 0.5-0.2 0.5-0.5-0.2-0.5-0.5-0.5z"/>
 </svg>
       </div>
-
     </div>
     <button type="submit" style="cursor: pointer" onClick="return false;">Criar conta</button>
     <a class="discrete"  style="cursor: pointer" (click)="changeNewUser()">Entre na sua conta</a>
   </form>
 </div>
+
+<p-toast position="bottom-left" ></p-toast>
 </body>
+

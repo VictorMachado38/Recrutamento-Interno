@@ -7,11 +7,12 @@ import {VagasFormComponent} from "./components/vagas-form/vagas-form.component";
 import {VagasListComponent} from "./components/vagas-list/vagas-list.component";
 import {SelectProfileComponent} from "./components/select-profile/select-profile.component";
 import {LoginComponent} from "./components/login/login.component";
-import {ProfileCandidateComponent} from "./components/profile-candidate/profile-candidate.component";
+import {ApplicationManagerComponent} from "./components/application-manager/application-manager.component";
+import {RecruiterProfileComponent} from "./components/recruiter-profile/recruiter-profile.component";
 
 const routes: Routes = [
-  {path:'',component: ProfileCandidateComponent  ,  pathMatch: 'full'},
-  {path:'*',component: InitComponent },
+  {path:'',component: RecruiterProfileComponent  ,  pathMatch: 'full'}, //Raiz
+  {path:'*',component: InitComponent }, //QUANDO NÃO ENCONTRAR NENHUMA ROTA
   {path:'form',component: ClientFormComponent},
   {path:'list',component: ClientListComponent},
   {path:'init',component: InitComponent},

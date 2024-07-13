@@ -49,6 +49,7 @@ export class VagasFormComponent implements OnInit, AfterViewInit, AfterViewCheck
 
   sendForm() {
     // if()
+    window.alert("s")
     this.invalDescricao = false;
     this.invalTitulo = false;
 

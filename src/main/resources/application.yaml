@@ -24,8 +24,8 @@ spring:
     open-in-view: false
 projeto:
   jwtSecret: bxOksa8BHgdAhR80Y3pEYvS5M+MnF2sheFDqprkTqQ4odqoszJLW1ikw64/nT/dTvlgrcBTq7HfK1B9Gai2h5A==
-#  jwtExpirationMs: 90000000 #15min
-  jwtExpirationMs: 30000 #30s
+  jwtExpirationMs: 90000000 #15min
+#  jwtExpirationMs: 30000 #30s
 # spring:
 #   datasource:
 #     url: ${DATABASE_URL}
