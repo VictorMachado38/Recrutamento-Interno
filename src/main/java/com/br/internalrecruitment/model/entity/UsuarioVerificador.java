@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "NPL_USUARIO_VERIFICADOR")
+@Table(name = "vericificador")
 @Getter
 @Setter
 @NoArgsConstructor

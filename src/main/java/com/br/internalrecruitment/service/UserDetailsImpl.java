@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -40,13 +39,10 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
-    //    private List<GrantedAuthority> authorities;
     private Collection<? extends GrantedAuthority> authorities;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return List.of();
         return authorities;
     }
 
@@ -62,25 +58,21 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-//        return false;
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-//        return false;
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        //        return false;
         return true;
     }
 
     @Override
     public boolean isEnabled() {
-        //        return false;
         return true;
     }
 }

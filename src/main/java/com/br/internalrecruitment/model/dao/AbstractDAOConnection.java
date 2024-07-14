@@ -1,6 +1,5 @@
 package com.br.internalrecruitment.model.dao;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,10 +13,6 @@ import java.sql.Statement;
 @Component
 public abstract class AbstractDAOConnection {
 
-
-//    String url = "jdbc:postgresql://172.19.0.20:5432/postgres";
-//    String username = "postgres";
-//    String password = "admin";
     @Getter
     @Setter
     @Value("${spring.datasource.url}")
@@ -53,7 +48,7 @@ public abstract class AbstractDAOConnection {
         }
     }
 
-    public void clouseConnection() {
+    public void closeConnection() {
         {
             try {
                 getStmt().close();

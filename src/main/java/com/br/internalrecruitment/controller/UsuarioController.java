@@ -2,6 +2,7 @@ package com.br.internalrecruitment.controller;
 
 import java.util.List;
 
+import com.br.internalrecruitment.model.dto.ResponseDTO;
 import com.br.internalrecruitment.model.dto.UsuarioDTO;
 import com.br.internalrecruitment.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,18 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping
-    public List<UsuarioDTO> listarTodos(){
+    public List<UsuarioDTO> listarTodos() {
         return usuarioService.listarTodos();
     }
 
+    @GetMapping(value = "/{login}")
+    public ResponseDTO<UsuarioDTO> listarTodos(@PathVariable("login") String login) {
+        return usuarioService.carregarPeloLogin(login);
+    }
+
     @PostMapping
-    public void inserir(@RequestBody UsuarioDTO usuario) {
-        usuarioService.inserir(usuario);
+    public ResponseDTO<UsuarioDTO> inserir(@RequestBody UsuarioDTO usuario) {
+        return usuarioService.inserir(usuario);
     }
 
     @PutMapping

@@ -19,9 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-// (securedEnabled = true,
-// jsr250Enabled = true,
-// prePostEnabled = true) // by default
 public class WebSecurityConfig {
 
     @Autowired
@@ -60,7 +57,6 @@ public class WebSecurityConfig {
 
         http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
 //        http.authenticationProvider(authenticationProvider());
-
 //        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

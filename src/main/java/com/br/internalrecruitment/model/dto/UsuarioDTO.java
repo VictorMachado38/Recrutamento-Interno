@@ -1,7 +1,9 @@
 package com.br.internalrecruitment.model.dto;
 
 import com.br.internalrecruitment.model.entity.Usuario;
+import com.br.internalrecruitment.model.entity.enums.Sexo;
 import com.br.internalrecruitment.model.entity.enums.TipoSituacaoUsuario;
+import com.br.internalrecruitment.model.entity.enums.TipoUsuario;
 import org.springframework.beans.BeanUtils;
 
 public class UsuarioDTO {
@@ -11,6 +13,8 @@ public class UsuarioDTO {
     private String login;
     private String senha;
     private String email;
+    private Sexo sexo;
+    private TipoUsuario tipoUsuario;
     private TipoSituacaoUsuario situacao;
 
     public UsuarioDTO(Usuario usuario) {
@@ -56,6 +60,19 @@ public class UsuarioDTO {
         return situacao;
     }
 
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
     public void setSituacao(TipoSituacaoUsuario situacao) {
         this.situacao = situacao;
     }

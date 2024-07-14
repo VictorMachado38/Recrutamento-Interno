@@ -1,4 +1,3 @@
-
 <head>
   <meta charset="utf-8">
 
@@ -15,142 +14,109 @@
     <div class="profile-nav col-md-3">
       <div class="panel">
         <div class="user-heading round">
-          <a href="#">
-            <img src="./assets/8.png" alt>
+          <a>
+            <img [src]="usuario.sexo == 'M' ? '../../assets/11.png' : '../../assets/8.png'" alt>
           </a>
-          <h1>Nome Recturador</h1>
-          <p><a href="/cdn-cgi/l/email-protection" style="border: none" class="__cf_email__" data-cfemail="385c5d415c5d41784c505d7d55595154165b5755">[email&#160;protected]</a></p>
+          <h1>{{ usuario.nome || 'Nome Recturador' }}</h1>
+          <p><a style="border: none"
+          >{{ usuario.email || 'joao@hotmail.com' }}</a></p>
         </div>
-        <ul class="nav nav-pills nav-stacked">
-          <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-          <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity
-<!--            <span class="label label-warning pull-right r-activity">9</span>-->
-          </a></li>
-          <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+        <ul class="nav nav-pills nav-stacked v-li-cursor-pointer">
+          <li [class.active]="mostrarVisaoGeral"><a (click)="mostrarPainel('visaoGeral')"> <i
+            class="fa fa-paperclip"></i>Visão geral</a></li>
+          <li [class.active]="mostrarMeuPerfil"><a (click)="mostrarPainel('meuPerfil')"> <i
+            class="fa fa-user"></i>Meu perfil</a></li>
+          <li [class.active]="mostrarCadastrarVagas"><a (click)="mostrarPainel('cadastrarVagas')"> <i
+            class="fa fa-plus-circle"></i>Cadastrar/Editar vagas</a></li>
+          <li [class.active]="mostrarListarVagas"><a (click)="mostrarPainel('listarVagas')"> <i
+            class="fa fa-list"></i>Listar vagas</a></li>
+          <li [class.active]="mostrarCandidatos"><a (click)="mostrarPainel('mostrarCandidatos')"> <i
+            class="fa fa-check-circle-o"></i>Candidaturas</a></li>
+          <li><a (click)="sair()"> <i
+            class="fa fa-sign-out"></i>Sair</a></li>
         </ul>
       </div>
     </div>
     <div class="profile-info col-md-9">
-<!--      <div class="panel">-->
-<!--        <form>-->
-<!--          <textarea placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area"></textarea>-->
-<!--        </form>-->
-<!--        <footer class="panel-footer">-->
-<!--          <button class="btn btn-warning pull-right">Post</button>-->
-<!--          <ul class="nav nav-pills">-->
-<!--            <li>-->
-<!--              <a href="#"><i class="fa fa-map-marker"></i></a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <a href="#"><i class="fa fa-camera"></i></a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <a href="#"><i class=" fa fa-film"></i></a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <a href="#"><i class="fa fa-microphone"></i></a>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </footer>-->
-<!--      </div>-->
-      <div class="panel">
+      <!--      <div class="panel">-->
+      <!--        <form>-->
+      <!--          <textarea placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area"></textarea>-->
+      <!--        </form>-->
+      <!--        <footer class="panel-footer">-->
+      <!--          <button class="btn btn-warning pull-right">Post</button>-->
+      <!--          <ul class="nav nav-pills">-->
+      <!--            <li>-->
+      <!--              <a href="#"><i class="fa fa-map-marker"></i></a>-->
+      <!--            </li>-->
+      <!--            <li>-->
+      <!--              <a href="#"><i class="fa fa-camera"></i></a>-->
+      <!--            </li>-->
+      <!--            <li>-->
+      <!--              <a href="#"><i class=" fa fa-film"></i></a>-->
+      <!--            </li>-->
+      <!--            <li>-->
+      <!--              <a href="#"><i class="fa fa-microphone"></i></a>-->
+      <!--            </li>-->
+      <!--          </ul>-->
+      <!--        </footer>-->
+      <!--      </div>-->
+
+      <!--      Meu perfil-->
+      <div *ngIf="mostrarVisaoGeral || mostrarMeuPerfil" id="meuPerfil" class="panel">
         <div class="bio-graph-heading">
-          Aliquam ac magna metus. Nam sed arcu non tellus fringilla fringilla ut vel ispum. Aliquam ac magna metus.
+          <img style=" width: 15rem; "
+               src="https://sistemapacto.com.br/wp-content/uploads/2022/06/new_logo_Pacto_sistema_para_Academia_color.png">
         </div>
         <div class="panel-body bio-graph-info">
-          <h1>Bio Graph</h1>
+          <h1>Meu Perfil</h1>
           <div class="row">
             <div class="bio-row">
-              <p><span>First Name </span>: Camila</p>
+              <p><span>Nome </span>: {{ usuario?.nome || 'Camila' }}</p>
             </div>
             <div class="bio-row">
-              <p><span>Last Name </span>: Smith</p>
+              <p><span>Usuário </span>: {{ usuario?.login || 'Smith' }}</p>
             </div>
             <div class="bio-row">
-              <p><span>Country </span>: Australia</p>
+              <p><span>Tipo Usuário </span>: {{ 'Recrutador (a)' }}</p>
             </div>
             <div class="bio-row">
-              <p><span>Birthday</span>: 13 July 1983</p>
+              <p><span>E-mail </span>: {{ usuario?.email || 'joao@hotmail.com' }}</p>
             </div>
             <div class="bio-row">
-              <p><span>Occupation </span>: UI Designer</p>
-            </div>
-            <div class="bio-row">
-              <p><span>Email </span>: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0c667f616578644c6a606d78606d6e226f6361">[email&#160;protected]</a></p>
-            </div>
-            <div class="bio-row">
-              <p><span>Mobile </span>: (12) 03 4567890</p>
-            </div>
-            <div class="bio-row">
-              <p><span>Phone </span>: 88 (02) 123456</p>
+              <p><span>Sexo: </span>: {{ usuario?.sexo == 'M' ? 'Masculino' : 'Feminino' }}</p>
             </div>
           </div>
         </div>
       </div>
-      <div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="panel">
-              <div class="panel-body">
-                <div class="bio-chart">
-                  <div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="35" data-fgcolor="#e06b7d" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(224, 107, 125); padding: 0px; -webkit-appearance: none; background: none;"></div>
-                </div>
-                <div class="bio-desk">
-                  <h4 class="red">Vaga 1</h4>
-                  <p>Started : 15 July</p>
-                  <p>Deadline : 15 August</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="panel">
-              <div class="panel-body">
-                <div class="bio-chart">
-                  <div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="63" data-fgcolor="#4CC5CD" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(76, 197, 205); padding: 0px; -webkit-appearance: none; background: none;"></div>
-                </div>
-                <div class="bio-desk">
-                  <h4 class="terques">Vaga 2</h4>
-                  <p>Started : 15 July</p>
-                  <p>Deadline : 15 August</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="panel">
-              <div class="panel-body">
-                <div class="bio-chart">
-                  <div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="75" data-fgcolor="#96be4b" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(150, 190, 75); padding: 0px; -webkit-appearance: none; background: none;"></div>
-                </div>
-                <div class="bio-desk">
-                  <h4 class="green">Vaga 3</h4>
-                  <p>Started : 15 July</p>
-                  <p>Deadline : 15 August</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="panel">
-              <div class="panel-body">
-                <div class="bio-chart">
-                  <div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="50" data-fgcolor="#cba4db" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(203, 164, 219); padding: 0px; -webkit-appearance: none; background: none;"></div>
-                </div>
-                <div class="bio-desk">
-                  <h4 class="purple">Vaga  4</h4>
-                  <p>Started : 15 July</p>
-                  <p>Deadline : 15 August</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
+
+      <!--      Vagas-->
+      <div *ngIf="mostrarVisaoGeral || mostrarListarVagas">
+        <h3 *ngIf="mostrarVisaoGeral">Vagas</h3>
+        <app-vagas-list (editarVagaEvent)="editarVaga($event)"></app-vagas-list>
       </div>
+
+      <!--      Mostrar Candidatos -->
+      <div *ngIf="mostrarVisaoGeral || mostrarCandidatos">
+        <h3 *ngIf="mostrarVisaoGeral">Candidatos</h3>
+        <app-vagas-list-candidate-apply (editarVagaEvent)="editarVaga($event)"></app-vagas-list-candidate-apply>
+      </div>
+
+
+      <!--      Cadastrar vagas-->
+      <div *ngIf="mostrarCadastrarVagas">
+        <app-vagas-form (showMessage)="showMessage($event)" [vagaSelecionada]="vagaSelecionada"
+                        [novaVaga]="novaVaga"></app-vagas-form>
+
+      </div>
+
+
     </div>
   </div>
+  <p-toast position="top-center"></p-toast>
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 

@@ -1,20 +1,24 @@
 package com.br.internalrecruitment.model.entity;
 
 import com.br.internalrecruitment.model.dto.UsuarioDTO;
+import com.br.internalrecruitment.model.entity.enums.Sexo;
 import com.br.internalrecruitment.model.entity.enums.TipoSituacaoUsuario;
+import com.br.internalrecruitment.model.entity.enums.TipoUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 import java.util.Objects;
 
 @Entity
-//@Transactional
-//@JsonIgnoreProperties(ignoreUnknown = true)
-@Table(name = "usuario", schema = "public")
-
+@Table(name = "usuario", schema = "public", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_usuario_login", columnNames = "login"),
+        @UniqueConstraint(name = "uk_usuario_email", columnNames = "email")
+})
+@Data
 public class Usuario {
 
     @Id
@@ -24,7 +28,7 @@ public class Usuario {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String login;
 
     @Column(nullable = false)
@@ -32,6 +36,14 @@ public class Usuario {
 
     @Column(nullable = false)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Sexo sexo;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoUsuario tipoUsuario;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = true)
@@ -48,47 +60,15 @@ public class Usuario {
         return id;
     }
 
-    public void setId(Long id) {
+    @Builder
+    public Usuario(Long id, String nome, String login, String senha, String email, Sexo sexo, TipoUsuario tipoUsuario, TipoSituacaoUsuario situacao) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public TipoSituacaoUsuario getSituacao() {
-        return situacao;
-    }
-
-    public void setSituacao(TipoSituacaoUsuario situacao) {
+        this.sexo = sexo;
+        this.tipoUsuario = tipoUsuario;
         this.situacao = situacao;
     }
 

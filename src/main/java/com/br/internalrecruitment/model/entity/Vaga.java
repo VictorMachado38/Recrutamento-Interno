@@ -1,6 +1,6 @@
 package com.br.internalrecruitment.model.entity;
 
-import com.br.internalrecruitment.model.dto.VagaDto;
+import com.br.internalrecruitment.model.dto.VagaDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
@@ -20,12 +20,13 @@ public class Vaga {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length = 5000)
     private String titulo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5000)
     private String descricao;
 
+    @Column(length = 5000)
     private String requisitos;
 
     @Builder
@@ -39,8 +40,8 @@ public class Vaga {
     public Vaga() {
     }
 
-    public VagaDto toDTO() {
-        return VagaDto.builder()
+    public VagaDTO toDTO() {
+        return VagaDTO.builder()
                 .id(this.id)
                 .titulo(this.titulo)
                 .descricao(this.descricao)

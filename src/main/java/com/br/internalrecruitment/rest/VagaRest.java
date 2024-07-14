@@ -3,7 +3,8 @@ package com.br.internalrecruitment.rest;
 import com.br.internalrecruitment.model.bo.VagaBO;
 import com.br.internalrecruitment.model.dao.impl.VagaInterfaceDAO;
 import com.br.internalrecruitment.model.dto.ResponseDTO;
-import com.br.internalrecruitment.model.dto.VagaDto;
+import com.br.internalrecruitment.model.dto.UsuarioAplicadoDTO;
+import com.br.internalrecruitment.model.dto.VagaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,18 +20,18 @@ public class VagaRest {
     @Autowired
     private VagaInterfaceDAO vagaInterfaceDAO;
 
-
-
     @PostMapping("/save")
     @CrossOrigin(origins = "*", maxAge = 3600)
-    public ResponseDTO<VagaDto> saveClient(@RequestBody VagaDto vaga) {
+    public ResponseDTO<VagaDTO> saveClient(@RequestBody VagaDTO vaga) {
         return bo.saveVaga(vaga, vagaInterfaceDAO);
     }
 
     @GetMapping("/list")
     @CrossOrigin(origins = "*", maxAge = 3600)
-    public ResponseDTO<List<VagaDto>> getAllClientess() {
+    public ResponseDTO<List<VagaDTO>> getAllVagas() {
         return bo.getVagas();
     }
+
+
 
 }

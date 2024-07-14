@@ -1,21 +1,23 @@
 package com.br.internalrecruitment.service;
 
+import com.br.internalrecruitment.model.dto.ResponseDTO;
 import com.br.internalrecruitment.model.dto.UsuarioDTO;
 import com.br.internalrecruitment.model.entity.Usuario;
 import com.br.internalrecruitment.model.entity.UsuarioVerificador;
 import com.br.internalrecruitment.model.entity.enums.TipoSituacaoUsuario;
 import com.br.internalrecruitment.repository.UsuarioRepository;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import static javax.ws.rs.core.Response.Status.*;
 
 @Service
 public class UsuarioService {
@@ -23,24 +25,76 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-//    @Autowired
-//    private UsuarioVerificador usuarioVerificador;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-//    @Autowired
-//    private EmailService emailService;
-
-    public List<UsuarioDTO> listarTodos(){
+    public List<UsuarioDTO> listarTodos() {
         List<Usuario> usuarios = usuarioRepository.findAll();
         return usuarios.stream().map(UsuarioDTO::new).toList();
     }
 
-    public void inserir(UsuarioDTO usuario) {
+    public ResponseDTO<UsuarioDTO> carregarPeloLogin(String login) {
+        Optional<Usuario> usuario = usuarioRepository.findByLogin(login);
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.get());
+
+        usuarioDTO.setSenha(null);
+
+        return ResponseDTO.<UsuarioDTO>builder()
+                .data(usuarioDTO)
+                .message("Cadastrado com sucesso.")
+                .description("Faça o login!")
+                .status(OK.getStatusCode())
+                .build();
+    }
+
+    public ResponseDTO<UsuarioDTO> inserir(UsuarioDTO usuario) {
+
         Usuario usuarioEntity = new Usuario(usuario);
         usuarioEntity.setSenha(passwordEncoder.encode(usuario.getSenha()));
-        usuarioRepository.save(usuarioEntity);
+        try {
+            usuarioRepository.save(usuarioEntity);
+            return ResponseDTO.<UsuarioDTO>builder()
+                    .data(usuario)
+                    .message("Cadastrado com sucesso.")
+                    .description("Faça o login!")
+                    .status(OK.getStatusCode())
+                    .build();
+        } catch (Exception e) {
+            if (e instanceof DataIntegrityViolationException) {
+                DataIntegrityViolationException cve = (DataIntegrityViolationException) e;
+                ConstraintViolationException cve2 = (ConstraintViolationException) cve.getCause();
+                System.out.println("Nome da restrição violada: " + cve2.getConstraintName());
+                if (cve2.getConstraintName() != null) {
+                    switch (cve2.getConstraintName()) {
+                        case "uk_usuario_email":
+                            return ResponseDTO.<UsuarioDTO>builder()
+                                    .data(usuario)
+                                    .message("Erro ao processar a requisição")
+                                    .description("E-mail já cadastrado.")
+                                    .status(PAYMENT_REQUIRED.getStatusCode())
+                                    .build();
+                        case "uk_usuario_login":
+                            return ResponseDTO.<UsuarioDTO>builder()
+                                    .data(usuario)
+                                    .message("Erro ao processar a requisição")
+                                    .description("Usuário já cadastrado.")
+                                    .status(PAYMENT_REQUIRED.getStatusCode())
+                                    .build();
+                        default:
+                            return ResponseDTO.<UsuarioDTO>builder()
+                                    .data(usuario)
+                                    .message("Erro ao processar a requisição")
+                                    .description("Erro na propridede " + cve2.getConstraintName())
+                                    .status(PAYMENT_REQUIRED.getStatusCode())
+                                    .build();
+                    }
+                } else
+                    return ResponseDTO.<UsuarioDTO>builder().data(usuario).message("Erro ao processar a requisição").status(BAD_REQUEST.getStatusCode()).build();
+            } else {
+                return ResponseDTO.<UsuarioDTO>builder().data(usuario).message("Erro ao processar a requisição").status(BAD_REQUEST.getStatusCode()).build();
+            }
+        }
+
     }
 
     public void inserirNovoUsuario(UsuarioDTO usuario) {
@@ -62,29 +116,6 @@ public class UsuarioService {
 //                "Você está recebendo um email de cadastro o número para validação é " + verificador.getUuid());
 
     }
-
-//    public String verificarCadastro(String uuid) {
-//
-//        UsuarioVerificador usuarioVerificacao = usuarioVerificador.findByUuid(UUID.fromString(uuid)).get();
-//
-//        if(usuarioVerificacao != null) {
-//            if(usuarioVerificacao.getDataExpiracao().compareTo(Instant.now()) >= 0) {
-//
-//                Usuario u = usuarioVerificacao.getUsuario();
-//                u.setSituacao(TipoSituacaoUsuario.ATIVO);
-//
-//                usuarioRepository.save(u);
-//
-//                return "Usuário Verificado";
-//            }else {
-//                usuarioVerificador.delete(usuarioVerificacao);
-//                return "Tempo de verificação expirado";
-//            }
-//        }else {
-//            return "Usuario não verificado";
-//        }
-//
-//    }
 
     public UsuarioDTO alterar(UsuarioDTO usuario) {
         Usuario usuarioEntity = new Usuario(usuario);

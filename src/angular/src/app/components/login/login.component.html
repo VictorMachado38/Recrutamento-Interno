@@ -2,8 +2,9 @@
 <div class="session">
   <div class="left v-max-width-550">
     <div>
-      <img style="margin-top:80%; width: 200px; right: 50%;position: absolute;right: 10px;"
-           src="https://sistemapacto.com.br/wp-content/uploads/2022/06/new_logo_Pacto_sistema_para_Academia_color.png">
+      <img
+        [style]="newUser ? 'margin-top:100%; width: 200px; right: 50%;position: absolute;right: 10px;' : 'margin-top:80%; width: 200px; right: 50%;position: absolute;right: 10px;'"
+        src="https://sistemapacto.com.br/wp-content/uploads/2022/06/new_logo_Pacto_sistema_para_Academia_color.png">
     </div>
     <!--    <svg enable-background="new 0 0 300 302.5" version="1.1" viewBox="0 0 300 302.5" xml:space="preserve"-->
     <!--         xmlns="http://www.w3.org/2000/svg">-->
@@ -17,16 +18,19 @@
     <!--</svg>-->
   </div>
 
+  <!--  Usuario-->
   <form *ngIf="!newUser" action="" class="log-in" autocomplete="off">
     <div class="v-min-width-550" style="width: 100%; text-align: end">
       <img style=" width: 100px; "
            src="https://sistemapacto.com.br/wp-content/uploads/2022/06/new_logo_Pacto_sistema_para_Academia_color.png">
     </div>
-    <h4>Bem vindo <span></span></h4>
-    <p>Faça login em sua conta:</p>
+    <h4>Bem vindo </h4>
+    <p><span class="v-blue-dark">{{ this.credencial.tipoUsuario === 'recruiter' ? 'Recrutador,' : 'Candidato, ' }}</span>
+      faça login na sua conta:</p>
     <div class="floating-label">
-      <input placeholder="Email" type="email" [(ngModel)]="login.login" name="email" id="email" autocomplete="off">
-      <label for="email">Email:</label>
+      <input placeholder="Usuário" type="text" [(ngModel)]="credencial.login" name="username" id="usernamea"
+             autocomplete="off">
+      <label for="username">Usuário:</label>
       <div class="icon">
 
         <svg enable-background="new 0 0 100 100" version="1.1" viewBox="0 0 100 100" xml:space="preserve"
@@ -46,7 +50,8 @@
       </div>
     </div>
     <div class="floating-label">
-      <input placeholder="Senha" [(ngModel)]="login.password" type="password" name="password" id="password" autocomplete="off">
+      <input placeholder="Senha" [(ngModel)]="credencial.senha" type="password" name="password" id="password"
+             autocomplete="off">
       <label for="password">Senha:</label>
       <div class="icon">
         <svg enable-background="new 0 0 24 24" version="1.1" viewBox="0 0 24 24" xml:space="preserve"
@@ -70,68 +75,91 @@
       </div>
 
     </div>
-    <button type="submit" style="cursor: pointer" (click)="sendForm()">Entrar</button>
+    <button class="v-button-active" type="submit" style="cursor: pointer" (click)="login()">Entrar</button>
     <a class="discrete" style="cursor: pointer" (click)="changeNewUser()">Criar conta</a>
   </form>
 
-  <form *ngIf="newUser" action="" class="log-in" autocomplete="off">
+  <!--  Novo Usuario-->
+  <form *ngIf="newUser" [formGroup]="newUserForm" (ngSubmit)="onSubmit()" class="log-in new-user" autocomplete="off">
     <div class="v-min-width-550" style="width: 100%; text-align: end">
       <img style=" width: 100px; "
            src="https://sistemapacto.com.br/wp-content/uploads/2022/06/new_logo_Pacto_sistema_para_Academia_color.png">
-    </div>˜
+    </div>
 
-    <!--    <h4>Bem vindo <span></span></h4>-->
-    <p>Cria sua conta:</p>
-    <div class="floating-label">
-      <input placeholder="Email" type="email" name="email" id="email" autocomplete="off">
-      <label for="email">Email:</label>
-      <div class="icon">
+    <p style="margin-bottom: 8px;">Cria sua conta:</p>
 
-        <svg enable-background="new 0 0 100 100" version="1.1" viewBox="0 0 100 100" xml:space="preserve"
-             xmlns="http://www.w3.org/2000/svg">
-<style type="text/css">
-	.st0 {
-    fill: none;
-  }
-</style>
-          <g transform="translate(0 -952.36)">
-	<path
-    d="m17.5 977c-1.3 0-2.4 1.1-2.4 2.4v45.9c0 1.3 1.1 2.4 2.4 2.4h64.9c1.3 0 2.4-1.1 2.4-2.4v-45.9c0-1.3-1.1-2.4-2.4-2.4h-64.9zm2.4 4.8h60.2v1.2l-30.1 22-30.1-22v-1.2zm0 7l28.7 21c0.8 0.6 2 0.6 2.8 0l28.7-21v34.1h-60.2v-34.1z"/>
-</g>
-          <rect class="st0" width="100" height="100"/>
-</svg>
-
+    <div
+      [class]="newUserForm.get('nome')?.invalid && (newUserForm.get('nome')?.dirty || newUserForm.get('nome')?.touched) ? 'floating-label v-error' : 'floating-label'">
+      <input placeholder="Nome Completo" type="text" id="nome" formControlName="nome" autocomplete="off">
+      <label for="nome">Nome Completo:</label>
+      <div
+        *ngIf="newUserForm.get('nome')?.invalid && (newUserForm.get('nome')?.dirty || newUserForm.get('nome')?.touched)">
+        <small *ngIf="newUserForm.get('nome')?.errors?.['required']">• Nome é obrigatório.</small>
+        <small *ngIf="newUserForm.get('nome')?.errors?.['minlength']">• Mínimo 10 caracteres.</small>
       </div>
     </div>
-    <div class="floating-label">
-      <input placeholder="Senha" type="password" name="password" id="password" autocomplete="off">
-      <label for="password">Senha:</label>
-      <div class="icon">
-        <svg enable-background="new 0 0 24 24" version="1.1" viewBox="0 0 24 24" xml:space="preserve"
-             xmlns="http://www.w3.org/2000/svg">
-<style type="text/css">
-	.st0 {
-    fill: none;
-  }
 
-  .st1 {
-    fill: #010101;
-  }
-</style>
-          <rect class="st0" width="24" height="24"/>
-          <path class="st1" d="M19,21H5V9h14V21z M6,20h12V10H6V20z"/>
-          <path class="st1"
-                d="M16.5,10h-1V7c0-1.9-1.6-3.5-3.5-3.5S8.5,5.1,8.5,7v3h-1V7c0-2.5,2-4.5,4.5-4.5s4.5,2,4.5,4.5V10z"/>
-          <path class="st1"
-                d="m12 16.5c-0.8 0-1.5-0.7-1.5-1.5s0.7-1.5 1.5-1.5 1.5 0.7 1.5 1.5-0.7 1.5-1.5 1.5zm0-2c-0.3 0-0.5 0.2-0.5 0.5s0.2 0.5 0.5 0.5 0.5-0.2 0.5-0.5-0.2-0.5-0.5-0.5z"/>
-</svg>
+    <div
+      [class]="newUserForm.get('login')?.invalid && (newUserForm.get('login')?.dirty || newUserForm.get('login')?.touched) ? 'floating-label v-error' : 'floating-label'">
+      <input placeholder="Usuário" type="text" formControlName="login" id="username" autocomplete="off">
+      <label for="username">Usuário:</label>
+      <div
+        *ngIf="newUserForm.get('login')?.invalid && (newUserForm.get('login')?.dirty || newUserForm.get('login')?.touched)">
+        <small *ngIf="newUserForm.get('login')?.errors?.['required']">• Usuário é obrigatório.</small>
+        <small *ngIf="newUserForm.get('login')?.errors?.['minlength']">• Usuário deve ter no mínimo 5
+          caracteres.</small>
+        <small *ngIf="newUserForm.get('login')?.errors?.['alphanumeric']">• Usuário deve conter apenas letras e
+          números.</small>
       </div>
     </div>
-    <button type="submit" style="cursor: pointer" onClick="return false;">Criar conta</button>
-    <a class="discrete"  style="cursor: pointer" (click)="changeNewUser()">Entre na sua conta</a>
+
+    <div
+      [class]="newUserForm.get('email')?.invalid && (newUserForm.get('email')?.dirty || newUserForm.get('email')?.touched) ? 'floating-label v-error' : 'floating-label'">
+      <input placeholder="E-mail" type="email" formControlName="email" id="email" autocomplete="off">
+      <label for="email">E-mail:</label>
+      <div
+        *ngIf="newUserForm.get('email')?.invalid && (newUserForm.get('email')?.dirty || newUserForm.get('email')?.touched)">
+        <small *ngIf="newUserForm.get('email')?.errors?.['required']">• E-mail é obrigatório.</small>
+        <small *ngIf="newUserForm.get('email')?.errors?.['email']">• Formato de e-mail inválido.</small>
+      </div>
+    </div>
+
+    <div
+      [class]="newUserForm.get('newPassword')?.invalid && (newUserForm.get('newPassword')?.dirty || newUserForm.get('newPassword')?.touched) ? 'floating-label v-error' : 'floating-label'">
+      <input placeholder="Senha" type="password" formControlName="newPassword" id="newPassword" autocomplete="off">
+      <label for="newPassword">Senha:</label>
+      <div
+        *ngIf="newUserForm.get('newPassword')?.invalid && (newUserForm.get('newPassword')?.dirty || newUserForm.get('newPassword')?.touched)">
+        <small *ngIf="newUserForm.get('newPassword')?.errors?.['required']">• Senha é obrigatória.</small>
+      </div>
+    </div>
+
+    <div
+      [class]="newUserForm.errors?.['mismatch'] && (newUserForm.get('checkNewPassword')?.dirty || newUserForm.get('checkNewPassword')?.touched) ? 'floating-label v-error' : 'floating-label'">
+      <input placeholder="Confirme a Senha" type="password" formControlName="checkNewPassword" id="checkNewPassword"
+             autocomplete="off">
+      <label for="checkNewPassword">Confirme a Senha:</label>
+      <div
+        *ngIf="newUserForm.errors?.['mismatch'] && (newUserForm.get('checkNewPassword')?.dirty || newUserForm.get('checkNewPassword')?.touched)">
+        <small>• As senhas não coincidem.</small>
+      </div>
+    </div>
+
+    <div style="margin-top: 4px;">
+      <p style="margin-bottom: 4px;" >Sexo: </p>
+      <p-selectButton class="v-sex-select" [options]="sexOptions" formControlName="sexo" optionLabel="label"
+                      optionValue="value"></p-selectButton>
+
+
+    </div>
+    <button [class]="newUserForm.invalid ? 'v-button-deactivate' : 'v-button-active'" [disabled]="newUserForm.invalid">
+      Criar conta
+    </button>
+    <a class="discrete" style="cursor: pointer" (click)="changeNewUser()">Entre na sua conta</a>
   </form>
 </div>
 
-<p-toast position="bottom-left" ></p-toast>
+<p-toast position="top-center"></p-toast>
 </body>
+
 

@@ -1,16 +1,20 @@
-import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {CadastroVagaDto} from "../../../model/dto/cadastro-vaga.dto";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-vagas-form',
   templateUrl: './vagas-form.component.html',
   styleUrls: ['./vagas-form.component.scss']
 })
-export class VagasFormComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class VagasFormComponent implements OnInit {
+
+  /** Construtor */
+
 
   constructor(private _http: HttpClient,
               private _messageService: MessageService,
@@ -18,62 +22,72 @@ export class VagasFormComponent implements OnInit, AfterViewInit, AfterViewCheck
               private _location: Location) {
   }
 
-  // apiLoaded: Observable<boolean>;
+  /** Atributos */
+
   cadastroVaga = new CadastroVagaDto();
   invalTitulo: boolean = false;
   invalDescricao: boolean = false;
   options: any;
   titlePage: string = 'Cadastrar vagas';
+  @Input()
+  novaVaga: boolean = true;
+  @Input()
+  vagaSelecionada: CadastroVagaDto = new CadastroVagaDto();
+  @Output()
+  showMessage = new EventEmitter<any>();
+  private apiUrl = environment.apiUrl;
 
+  /** Métodos herdados */
 
   ngOnInit(): void {
     const url = this._location.path();
-    if (url !== '/vagas/form') {
-      this.cadastroVaga = Object.assign({}, this._route.snapshot.queryParams);
+    if (!this.novaVaga) {
+      this.cadastroVaga = Object.assign({}, this.vagaSelecionada);
       this.titlePage = 'Editar vaga';
     } else {
-      this.titlePage = 'Cadastrar vagas';
+      this.titlePage = 'Cadastrar vaga';
       this.cadastroVaga = new CadastroVagaDto();
     }
-    // this.options = {
-    //   center: {lat: -16.688059517919058, lng: -49.26408132103648},
-    //   zoom: 12
-    // };
   }
 
-  ngAfterViewInit(): void {
-  }
-
-  ngAfterViewChecked(): void {
-  }
+  /** Métodos de requisição */
 
   sendForm() {
     // if()
-    window.alert("s")
+    // window.alert("s")
     this.invalDescricao = false;
     this.invalTitulo = false;
 
     if (this.valid(this.cadastroVaga.descricao) || this.valid(this.cadastroVaga.titulo)) {
       if (this.valid(this.cadastroVaga.descricao)) {
         this.invalDescricao = true;
-        this._messageService.add({
+        this.showMessage.emit({
           severity: 'error',
           summary: 'O Título é obrigatório'
-        });
+        })
+        // this._messageService.add({
+        //   severity: 'error',
+        //   summary: 'O Título é obrigatório'
+        // });
       }
 
       if (this.valid(this.cadastroVaga.titulo)) {
         this.invalTitulo = true;
-        this._messageService.add({
+        this.showMessage.emit({
           severity: 'error',
-          summary: 'A Descrição é obrigatória'
-        });
+          summary: 'O Descrição é obrigatório'
+        })
       }
       return;
     }
 
 
-    this._http.post(`http://18.229.131.192:8081/vaga/save`, this.cadastroVaga).subscribe({
+    const token = localStorage.getItem('token'); // Obtenha o token do localStorage
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    this._http.post(`${this.apiUrl}/vaga/save`, this.cadastroVaga, {headers}).subscribe({
       next: (retorno: any) => {
         this.cadastroVaga = retorno.data;
         if (retorno.status === 200) {
@@ -100,6 +114,14 @@ export class VagasFormComponent implements OnInit, AfterViewInit, AfterViewCheck
       },
     });
 
+  }
+
+  /** Métodos auxiliares */
+
+  novaVagaFunc() {
+    this.novaVaga = true;
+    this.titlePage = 'Cadastrar vaga';
+    this.cadastroVaga = new CadastroVagaDto();
   }
 
   private valid(atributo: string | undefined) {

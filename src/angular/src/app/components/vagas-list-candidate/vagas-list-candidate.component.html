@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-12" *ngFor="let vaga of vagas; let i = index">
+    <div class="panel">
+      <div class="panel-body" >
+        <div class="bio-chart" style="position: relative">
+          <div style="display:inline;width:100px;height:100px;">
+            <canvas width="100" height="100px"></canvas>
+            <img src="assets/10.png" class="knob" data-width="100" data-height="100" data-displayprevious="true"
+                 data-thickness=".2" value="35" data-fgcolor="#e06b7d" data-bgcolor="#e8e8e8"
+                 style="width: 54px; position: absolute; vertical-align: middle; margin-top: 28px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(224, 107, 125); padding: 0px; -webkit-appearance: none; background: none;">
+          </div>
+          <button style="left: 9%;bottom: -13%;position: absolute;" (click)="sendApply(vaga.id)" pButton pRipple type="button" label="Aplicar"
+                  class="p-button-outlined p-button-rounded p-button-sm"></button>
+        </div>
+        <div class="bio-chart-mobile" style="position: relative; width: 20%">
+          <button  (click)="sendApply(vaga.id)" pButton pRipple type="button" label="Aplicar"
+                  class="p-button-outlined p-button-rounded p-button-sm"></button>
+        </div>
+        <div class="bio-desk-100">
+          <h4 [class.red]="i % coresVagas.length === 0"
+              [class.terques]="i % coresVagas.length === 1"
+              [class.green]="i % coresVagas.length === 2"
+              [class.purple]="i % coresVagas.length === 3">
+            {{ 'Vaga '+  vaga.id || 'Vaga ' + i }}
+          </h4>
+          <p>Título : {{ vaga.titulo || 'Título ' + i }}</p>
+          <p>Descrição : {{ vaga.descricao || 'Descrição ' + i }}</p>
+          <p>Requisitos : {{ vaga.requisitos || 'Requisitos ' + i }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="vagas.length === 0">
+  <h3>Nenhuma vaga cadastrada</h3>
+</div>

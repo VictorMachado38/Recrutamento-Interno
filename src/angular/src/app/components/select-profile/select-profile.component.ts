@@ -8,12 +8,23 @@ import {Router} from "@angular/router";
 })
 export class SelectProfileComponent implements OnInit {
 
+  /** Construtor */
+
   constructor(private _router: Router) { }
+
+  /** Atributos */
+
+  /** Métodos herdados */
 
   ngOnInit(): void {
   }
 
-  goToLoginPage() {
-    this._router.navigate(['/login']);
+  /** Métodos de requisição */
+
+  /** Métodos auxiliares */
+
+  goToLoginPage(userType: 'candidate' | 'recruiter') {
+    this._router.navigate(['/login', userType]);
   }
+
 }

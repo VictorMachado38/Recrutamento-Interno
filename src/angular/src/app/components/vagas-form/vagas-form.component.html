@@ -37,6 +37,8 @@
 
     <button (click)="sendForm()" pButton pRipple type="button" label="Salvar"
             class="p-button-outlined p-button-rounded p-button-sm"></button>
+    <button (click)="novaVagaFunc()" *ngIf="!novaVaga" pButton pRipple type="button" label="Nova Vaga"
+            class="p-button-outlined p-button-rounded p-button-sm ml-4"></button>
 
 
   </div>
@@ -45,7 +47,7 @@
 </div>
 
 
-<p-toast position="bottom-left" ></p-toast>
+<!--<p-toast position="top-center" ></p-toast>-->
 <!--<p-toast  ></p-toast>-->
 
 <!--<button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success mb-2"></button>-->
