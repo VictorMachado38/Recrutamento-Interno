@@ -1,10 +1,35 @@
-/Users/victor/Documents/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dto/ResponseDTO.java
-/Users/victor/Documents/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/InternalRecruitment.java
-/Users/victor/Documents/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/rest/VagaRest.java
-/Users/victor/Documents/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/controller/TesteController.java
-/Users/victor/Documents/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/entity/Vaga.java
-/Users/victor/Documents/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dao/impl/VagaInterfaceDAO.java
-/Users/victor/Documents/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dao/impl/VagaDAO.java
-/Users/victor/Documents/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/bo/VagaBO.java
-/Users/victor/Documents/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dto/VagaDto.java
-/Users/victor/Documents/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dao/AbstractDAOConnection.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dto/UsuarioDTO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/security/WebSecurityConfig.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dto/UsuarioAplicadoDTO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/security/jwt/JwtUtils.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/entity/Vaga.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/controller/AuthController.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/service/AplicacaoService.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/rest/VagaRest.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dto/AplicacaoDTO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/entity/enums/Sexo.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dao/impl/VagaDAO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/service/AuthService.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/security/jwt/AuthEntryPointJwt.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/security/jwt/JwtAuthenticationFilter.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/entity/enums/TipoUsuario.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/rest/AplicacaoRest.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/entity/UsuarioVerificador.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/repository/UsuarioRepository.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/service/UserDetailServiceImpl.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dto/ResponseDTO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/entity/Usuario.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dao/impl/AplicacaoInterfaceDAO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/service/UserDetailsImpl.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dto/AuthenticationDTO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/entity/enums/TipoSituacaoUsuario.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dto/AcessDTO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dao/impl/VagaInterfaceDAO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/service/UsuarioService.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/controller/UsuarioController.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/InternalRecruitment.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/entity/Aplicacao.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/bo/VagaBO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dto/VagaDTO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/bo/AplicacaoBO.java
+/Users/victor/Documents/GitHub - VictorMachado38/Pacto/Recrutamento Interno/src/main/java/com/br/internalrecruitment/model/dao/AbstractDAOConnection.java

@@ -5,7 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "start-m": "ng serve --host 0.0.0.0 ",
-    "build": "ng build",
+    "build": "ng build --configuration production",
+    "build-dev": "ng build --configuration development",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

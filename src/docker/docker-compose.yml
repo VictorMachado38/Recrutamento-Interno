@@ -14,22 +14,22 @@ services:
         ipv4_address: 172.19.0.20
   angular:
     ports:
-      - '9000:80/tcp'
+      - '4200:80/tcp'
     container_name: angular
-#    image: angular local
-    image: victormachado38/pacto:angular
+    image: angular3
+#    image: victormachado38/pacto:angular
     networks:
       - mynetwork
-#    environment:
-#      - DATABASE_URL=jdbc:postgresql://Banco-de-Dados:5432/postgres
-#      - DATABASE_USERNAME=postgres
-#      - DATABASE_PASSWORD=admin
+    environment:
+      - DATABASE_URL=jdbc:postgresql://Banco-de-Dados:5432/postgres
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=admin
   java:
     ports:
       - '8081:8081'
     container_name: java
-#    image: java-app local
-    image: victormachado38/pacto:java
+    image: java2
+#    image: victormachado38/pacto:java
     networks:
       mynetwork:
         ipv4_address: 172.19.0.19

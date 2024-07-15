@@ -1,0 +1,109 @@
+version: "3.8"
+
+services:
+  traefik:
+    container_name: traefik
+    image: "traefik:latest"
+    restart: always
+    command:
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --api.insecure=true
+      - --api.dashboard=true
+      - --providers.docker
+      - --log.level=ERROR
+      - --certificatesresolvers.leresolver.acme.httpchallenge=true
+      - --certificatesresolvers.leresolver.acme.email=team@chatbotsolucoes.online #Defina aqui seu endereço de e-mail, é para geração de certificados SSL com Let's Encrypt. 
+      - --certificatesresolvers.leresolver.acme.storage=./acme.json
+      - --certificatesresolvers.leresolver.acme.httpchallenge.entrypoint=web
+
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./acme.json:/acme.json"
+    labels:
+      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=web"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.traefik-dashboard.rule=Host(`traefik.tteste.online`)" #Coloque o Seu Dominio do Traefik Aqui
+      - "traefik.http.routers.traefik-dashboard.entrypoints=websecure"
+      - "traefik.http.routers.traefik-dashboard.service=api@internal"
+      - "traefik.http.routers.traefik-dashboard.tls.certresolver=leresolver"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=chatbot:$$2y$$05$$ePaM33PTPpaqFNmzhwODjOfvs.hpUM.QvAc3b8arTvUxRStuENvVK" #Coloque a Senha do Traefik Aqui Nao Remova As Aspas
+      - "traefik.http.routers.traefik-dashboard.middlewares=traefik-auth"
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    labels:
+      # Frontend
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`portainer.tteste.online`)" #Coloque o Seu Dominio do Portainer Aqui
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.services.frontend.loadbalancer.server.port=9000"
+      - "traefik.http.routers.frontend.service=frontend"
+      - "traefik.http.routers.frontend.tls.certresolver=leresolver"
+
+      # Edge
+      - "traefik.http.routers.edge.rule=Host(`edge.tteste.online`)" #Coloque o Seu Dominio do Edge Aqui
+      - "traefik.http.routers.edge.entrypoints=websecure"
+      - "traefik.http.services.edge.loadbalancer.server.port=8000"
+      - "traefik.http.routers.edge.service=edge"
+      - "traefik.http.routers.edge.tls.certresolver=leresolver"
+
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    volumes:
+      - ./html:/usr/share/nginx/html
+    labels:
+      - "traefik.http.routers.nginx.rule=Host(`pacto.tteste.online`)"
+      - "traefik.http.routers.nginx.entrypoints=websecure"
+      - "traefik.http.routers.nginx.tls.certresolver=leresolver"
+
+  java:
+    ports:
+      - '8081:8081'
+    container_name: java
+    image: victormachado38/pacto:java2
+    labels:
+      - "traefik.http.routers.java.rule=Host(`java.tteste.online`)"
+      - "traefik.http.routers.java.entrypoints=websecure"
+      - "traefik.http.routers.java.tls.certresolver=leresolver"
+      - "traefik.http.routers.java.service=java"
+      - "traefik.http.services.java.loadbalancer.server.port=8081"
+      - "traefik.http.services.java.loadbalancer.passhostheader=true"
+      - "traefik.http.routers.java.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+    networks:
+      mynetwork:
+        ipv4_address: 172.19.0.19
+
+  postgress-14-image:
+    ports:
+      - '5432:5432'
+    container_name: Banco-de-Dados
+    image: postgres:14
+    environment:
+      - POSTGRES_PASSWORD=admin
+    networks:
+      mynetwork:
+        ipv4_address: 172.19.0.20
+
+networks:
+  mynetwork:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
+
+volumes:
+  portainer_data:
