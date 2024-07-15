@@ -18,7 +18,7 @@ Compose está configurado para rodar o backend na porta 8081, o frontend na port
 você quiser mudar, altere o arquivo logistics/src/docker/***[docker-compose.yml](src/docker/docker-compose.yml)***.
 
 O Docker Hub para o projeto
-é [Docker-hub-link](https://hub.docker.com/repository/docker/victormachado38/logistics/general)
+é [Docker-hub-link](https://hub.docker.com/r/victormachado38/pacto/tags)
 
 Para rodar o Docker, execute o comando:
 
@@ -26,7 +26,7 @@ Para rodar o Docker, execute o comando:
 docker-compose up
 ```
 
-Em seguida, abra o navegador e digite [***localhost:9000***](http://localhost:9000/).
+Em seguida, abra o navegador e digite [***localhost:4200***](http://localhost:4200/).
 
 ## 🔧 Instalação
 
