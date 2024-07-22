@@ -16,8 +16,8 @@ services:
     ports:
       - '4200:80/tcp'
     container_name: angular
-    image: angular3
-#    image: victormachado38/pacto:angular
+#    image: angular3
+    image: victormachado38/pacto:angular3
     networks:
       - mynetwork
     environment:
@@ -28,8 +28,8 @@ services:
     ports:
       - '8081:8081'
     container_name: java
-    image: java2
-#    image: victormachado38/pacto:java
+#    image: java2
+    image: victormachado38/pacto:java2
     networks:
       mynetwork:
         ipv4_address: 172.19.0.19
