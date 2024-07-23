@@ -15,7 +15,7 @@ Docker(opcional)
 ## 🐋🚢 Executando com Docker
 
 Compose está configurado para rodar o backend na porta 8081, o frontend na porta 9000 e o banco de dados na 5432. Se
-você quiser mudar, altere o arquivo logistics/src/docker/***[docker-compose.yml](src/docker/docker-compose.yml)***.
+você quiser mudar, altere o arquivo Recrutamento Interno/src/docker/***[docker-compose.yml](src/docker/docker-compose.yml)***.
 
 O Docker Hub para o projeto
 é [Docker-hub-link](https://hub.docker.com/r/victormachado38/pacto/tags)
